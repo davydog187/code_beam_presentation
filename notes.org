@@ -1,0 +1,34 @@
+Notes
+
+* Shallow VS Deep modules
+** Modules should be deep. Deep modules provide a lot of functionality while maintaining a small API/Interface
+** When modules are too shallow, they end up being a "bag of funcitons" without a clear purpose
+*** Have you ever written a Util module? This is likely a "shallow" module that is missing depth. Consider where these functions belong
+** Single Responsibility Principle
+*** Were these functions grouped together because you had no where else to put them? Do they have a singular purpose?
+
+* Pattern matching is not a type system
+**   Elixir is not a staticly typed language. Period.
+** Pattern matching is a great tool, but it is not a replacement for a type system, because it will never be as comprehensive as a static type system
+** As a beginner, I tried to pattern match nearly the exact shape of the data in every function head
+*** Over pattern matching in function heads leads to neadlessly deep, and hard to refactor code
+
+* Guards are not a type system
+** Guards are a form of pattern matching. They "guard" your funciton from intruders, values which are not
+
+* Env variables in module attributes
+
+* Maps vs keyword lists
+
+
+* Inspiration
+** https://www.reddit.com/r/elixir/comments/a03pc2/how_easy_is_it_to_refactor_elixir_code/?st=JOX2HEH8&sh=b5e7657d  https://www.stacktracehq.com/blog/extensibility-in-elixir-using-behaviours/
+** All the little things - Sandi Metz - https://www.youtube.com/watch?v=8bZh5LMaSmE
+** Refactoring Elixir - Lessons Learned from a Year on Exercism.Io https://www.youtube.com/watch?v=tJJMrtJEK1A
+
+* Presentation material
+** https://www.ted.com/playlists/574/how_to_make_a_great_presentation
+** https://www.presentationzen.com/
+** https://presentationzen.blogs.com/presentationzen/2005/09/whats_good_powe.html
+** https://twut.nd.edu/PDF/PresentationZenRubric.pdf
+** https://youtu.be/lpvgfmEU2Ck
