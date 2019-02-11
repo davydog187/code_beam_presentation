@@ -1,5 +1,15 @@
 Notes
 
+* What's the problem?
+** Beginner's are initially attracted to what separates Elixir from other languages. Pattern matching, guards, functional programming
+** They tend to use these features, but take a long time to incorporate other very powerful features of the language, namely behaviours and protocols
+
+* What could be?
+** Pattern matching is great. Use that as a filter, but avoid reaching to deep or being overly restrictive in pattern matching
+** Let the body of your funcions be the ones that do the hard word of working with you data
+** Leverage behaviors to define multiple implemenations for different types - TODO what is the OO version of this? Is there a design pattern to point to?
+** Use protocols when there is a system level pattern. This is the Open/Closed principle right here. Protocols allow you to be open for extension, closed for modification
+
 * Shallow VS Deep modules
 ** Modules should be deep. Deep modules provide a lot of functionality while maintaining a small API/Interface
 ** When modules are too shallow, they end up being a "bag of funcitons" without a clear purpose
@@ -25,10 +35,20 @@ Notes
 ** https://www.reddit.com/r/elixir/comments/a03pc2/how_easy_is_it_to_refactor_elixir_code/?st=JOX2HEH8&sh=b5e7657d  https://www.stacktracehq.com/blog/extensibility-in-elixir-using-behaviours/
 ** All the little things - Sandi Metz - https://www.youtube.com/watch?v=8bZh5LMaSmE
 ** Refactoring Elixir - Lessons Learned from a Year on Exercism.Io https://www.youtube.com/watch?v=tJJMrtJEK1A
+*** Nudge - behavioral economics book
+*** Go to the source code of great projects to learn how to write good code
+
+
 
 * Presentation material
 ** https://www.ted.com/playlists/574/how_to_make_a_great_presentation
+***  Likeable Hero -> Encounters Roadblocks -> Emerges Transformed
 ** https://www.presentationzen.com/
 ** https://presentationzen.blogs.com/presentationzen/2005/09/whats_good_powe.html
 ** https://twut.nd.edu/PDF/PresentationZenRubric.pdf
 ** https://youtu.be/lpvgfmEU2Ck
+
+
+* Software
+** https://github.com/jxnblk/mdx-deck
+** https://github.com/pomber/code-surfer
