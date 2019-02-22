@@ -13,18 +13,18 @@ REFACTORING ELIXIR FOR MAINTAINABILITY
 ##### By Dave Lucia - Platform Architect @ SimpleBet
 ##### `@davydog187`
 ---
-### As a beginner... 
-The main abstraction for solving problem in Elixir is to write Modules and functions that leverage pattern matching 
+### As a beginner...
+The main abstraction for problem solving in Elixir is to write Modules and functions that leverage pattern matching
 
 ```elixir
 defmodule MyModule do
   def foo(binary) when is_binary(binary), do: String.upcase(binary)
-  def foo(%MyStruct{} = struct), do: struct.message 
+  def foo(%MyStruct{} = struct), do: struct.message
 end
 ```
 ---
 
-### The Problems
+### The Problems # TODO fix this, its dumb
 
 1. When does **Pattern Matching** get in the way of good code? :robot:
 2. How do we eliminate **Code Duplication**? :computer: :computer: :computer:
@@ -43,12 +43,12 @@ end
 
 ### Currently
 
-* Uncle and Dog dad 
+* Uncle and Dog dad
 * SimpleBet - **Platform Software Architect** - *Elixir  | Rust*
 
 ### Formerly
-* The Outline - **Founding team member** - *Elixir | Javascript*
-* Bloomberg - **Senior Developer** - *Javascript | C++*
+* The Outline - **Founding team member** - *Elixir | JavaScript*
+* Bloomberg - **Senior Developer** - *JavaScript | C++*
 ---
 
 ### Pattern matching is :cool:
@@ -86,16 +86,16 @@ def foo(%Post{} = post), do: post.comment.author.favorite_pet
 
 ---
 # Pattern matching in function heads
-### :white_check_mark: Make API boundaries explicit
+### :white_check_mark: Makes API boundaries explicit
 ### :white_check_mark: Match on result types
 ```elixir
 def foo({:ok, value}), do: value
-def foo({:error, reason}), do: value
+def foo({:error, reason}), do: reason
 
 ```
 ### :white_check_mark: Parse binary values
 ---
-# Case Study 
+# Case Study
 # Let's build a blog :newspaper:
 ---
 # Post Data Model
@@ -128,7 +128,7 @@ end
 ---
 # Let's :hot_pepper: it up with some Markdown
 ---
-# Expose a function to render markdown in templates
+# Expose a function to render Markdown in templates
 ```elixir
 defmodule Blog.Web.PostView do
   use Blog.Web, :view
@@ -153,7 +153,7 @@ end
 
 ```eex
 <section>
-  <%# Convert the markdown -> HTML %>
+  <%# Convert the Markdown -> HTML %>
   <%= render_markdown @post.body %>
 </section>
 ```
@@ -214,7 +214,7 @@ We need have to remember to use the `render_markdown/1` function
 
 ## Let's refactor by leveraging Protocols
 ---
-## Protocols help you acheive the Open/Closed Principle  in Elixir
+## Protocols help you achieve the Open/Closed Principle  in Elixir
 
 :white_check_mark: Open for extension
 :x: Closed for modification
@@ -293,7 +293,7 @@ def Hotdog do
 end
 ```
 ---
-# Lets make `%Markdown{}` implment the `Ecto.Type` Behaviour :dollar:
+# Lets make `%Markdown{}` implement the `Ecto.Type` Behaviour :dollar:
 ---
 ```elixir
 defmodule Blog.Post do
@@ -310,9 +310,9 @@ end
 ```elixir
 defmodule Blog.Markdown do
   @behaviour Ecto.Type
-  
-  def type, do: :string 
- 
+
+  def type, do: :string
+
   def cast(binary) when is_binary(binary) do
     {:ok, %Markdown{text: binary}}
   end
@@ -351,5 +351,7 @@ Phoenix.View.render(
 ---
 # Thanks!
 
-##### By Dave Lucia - Platform Architect @ SimpleBet
+##### By Dave
+
+Lucia - Platform Architect @ SimpleBet
 ##### `@davydog187`
