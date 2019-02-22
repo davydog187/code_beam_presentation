@@ -10,66 +10,95 @@ page_number: true
 
 REFACTORING ELIXIR FOR MAINTAINABILITY
 ===
-##### By Dave Lucia
+##### By Dave Lucia - Platform Architect @ SimpleBet
 ##### `@davydog187`
-
 ---
-# ~~REFACTORING ELIXIR FOR MAINTAINABILITY~~
-# Leveraging Protocols and Behaviours to write better designed Elixir programs
----
+### As a beginner... 
+The main abstraction for solving problem in Elixir is to write Modules and functions that leverage pattern matching 
 
-# The Problem
-
-Elixir is a very expressive language that offers syntactic features that are new and exciting when coming from other languages. Beginners tend to overuse features such as pattern matching and multiple function heads because of their novelty, while missing opportunities to make their code more generic and workable. Additionally, powerful language features such as protocols and behaviours are often overlooked due to their relative complexity.
-
----
-1. Beginners love pattern match, and overuse it
-2. Protocols are a higher level concept with unclear applications
-3. Behaviours don't seem useful when first starting out, and its unclear when to use them
-
----
-# What will we do for the next 20 minutes?
-1. Write some bad code in Phoenix
-2. Make it better with Protocols
-3. Learn a bit about how Protocols work
-4. Make the code EVEN BETTER with behaviours
----
-
-# Who is this guy?
-
-
-## Dave Lucia
-
-Currently
-* Platform Software Architect @ SimpleBet (Elixir + Rust)
-
-
-Formerly
-* Founding team member of The Outline (Elixir + Javascript)
-* Bloomberg.com
----
-# What got me excited about Elixir?
-# Pattern matching is :cool:
 ```elixir
-def foo(%{} = map) do
-  # map stuff
-end
-
-def foo(atom) when is_atom(atom) do
-  # atom stuff
-end
-
-def foo("" <> binary) do
-  # binary stuff
+defmodule MyModule do
+  def foo(binary) when is_binary(binary), do: String.upcase(binary)
+  def foo(%MyStruct{} = struct), do: struct.message 
 end
 ```
 ---
 
-# TODO write an example of excessive pattern matching
+### The Problems
+
+1. When does **Pattern Matching** get in the way of good code? :robot:
+2. How do we eliminate **Code Duplication**? :computer: :computer: :computer:
+3. **Behaviours** - Why would I bother? :smirk:
 ---
-# Let's build a blog :newspaper:
+# What will we do for the next 20 minutes?
+1. :x: Write some bad code in Phoenix
+2. :white_check_mark: Make it better with Protocols
+3. :white_check_mark: Learn a bit about how Protocols work
+4. :white_check_mark: Make the code EVEN BETTER with behaviours
 ---
 
+# Who is this guy??
+
+![bg contain](assets/profile.jpg)
+
+### Currently
+
+* Uncle and Dog dad 
+* SimpleBet - **Platform Software Architect** - *Elixir  | Rust*
+
+### Formerly
+* The Outline - **Founding team member** - *Elixir | Javascript*
+* Bloomberg - **Senior Developer** - *Javascript | C++*
+---
+
+### Pattern matching is :cool:
+```elixir
+defmodule Expng do
+  def png_parse(<< 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A,
+                 _length :: size(32),
+                 "IHDR",
+                 width :: size(32),
+                 height :: size(32),
+                 bit_depth,
+                 color_type,
+                 compression_method,
+                 filter_method,
+                 interlace_method,
+                 _crc :: size(32),
+                 chunks :: binary>>) do
+```
+
+#### Source: https://zohaib.me/binary-pattern-matching-in-elixir/
+---
+
+# Pattern matching can be a novelty
+
+```elixir
+def foo(%Post{comment: %Comment{author: %Author{favorite_pet: pet}), do: pet
+
+# VS
+
+def foo(%Post{} = post), do: post.comment.author.favorite_pet
+```
+---
+# Pattern matching in function heads
+# :x: because you can
+
+---
+# Pattern matching in function heads
+### :white_check_mark: Make API boundaries explicit
+### :white_check_mark: Match on result types
+```elixir
+def foo({:ok, value}), do: value
+def foo({:error, reason}), do: value
+
+```
+### :white_check_mark: Parse binary values
+---
+# Case Study 
+# Let's build a blog :newspaper:
+---
+# Post Data Model
 
 ```elixir
 defmodule Blog.Post do
@@ -82,6 +111,8 @@ defmodule Blog.Post do
   end
 end
 ```
+---
+# Post Template
 
 ```eex
 <article>
@@ -97,6 +128,7 @@ end
 ---
 # Let's :hot_pepper: it up with some Markdown
 ---
+# Expose a function to render markdown in templates
 ```elixir
 defmodule Blog.Web.PostView do
   use Blog.Web, :view
@@ -106,6 +138,7 @@ defmodule Blog.Web.PostView do
   end
 end
 ```
+---
 
 ```elixir
 defmodule Blog.Markdown do
@@ -188,6 +221,9 @@ We need have to remember to use the `render_markdown/1` function
 
 > Protocols are a mechanism to achieve polymorphism in Elixir. Dispatching on a protocol is available to any data type as long as it implements the protocol.
 ---
+# TODO make a pseudo protocol consolodation example
+
+---
 ## We can extend the rendering power of Phoenix by leveraging its `Phoenix.HTML.Safe` Protocol
 ---
 ```elixir
@@ -241,4 +277,79 @@ post = put_in(post.body, Markdown.new(post.body))
 ---
 # Behaviours :sunglasses:
 ---
-#
+# Behaviours are interfaces :computer:
+
+```elixir
+def Food do
+  @callback is_hotdog?(any()) :: boolean()
+end
+
+def Hotdog do
+  defstruct [:val]
+
+  @behaviour Food
+
+  def is_hotdog?(%Hotdog{}), do: true
+end
+```
+---
+# Lets make `%Markdown{}` implment the `Ecto.Type` Behaviour :dollar:
+---
+```elixir
+defmodule Blog.Post do
+  use Blog.Web, :model
+  alias Blog.Markdown
+  schema “posts” do
+    field :title, :string
+    field :author, :string
+    field :body, Markdown # The custom Ecto.Type
+  end
+end
+```
+---
+```elixir
+defmodule Blog.Markdown do
+  @behaviour Ecto.Type
+  
+  def type, do: :string 
+ 
+  def cast(binary) when is_binary(binary) do
+    {:ok, %Markdown{text: binary}}
+  end
+
+  def load(binary) when is_binary(binary) do
+    {:ok, %Markdown{text: binary}}
+  end
+
+  def dump(%Markdown{text: binary}) when is_binary(bibary) do
+    {:ok, binary}
+  end
+end
+```
+---
+# Now `Post.body` is always a `%Markdown{}`
+
+```elixir
+post = Repo.get!(Post, 1)
+
+true = match?(%Markdown{}, post.body)
+
+# No longer needed
+# post = put_in(post.body, Markdown.new(post.body))
+
+Phoenix.View.render(
+  Blog.Web.PostView,
+  "show.html",
+  post: post
+)
+```
+---
+# What have we learned?
+1. Pattern matching is great, but don't overuse it
+2. Protocols can make function calls implicit
+3. Behaviours can be leveraged to plug into existing systems
+---
+# Thanks!
+
+##### By Dave Lucia - Platform Architect @ SimpleBet
+##### `@davydog187`
