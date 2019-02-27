@@ -83,80 +83,119 @@ article#presentation > svg[data-marpit-svg] > foreignObject[data-marpit-advanced
 }article#presentation > svg > foreignObject > section[data-marpit-advanced-background-split] {
   width: 100%;
   height: 100%;
-}</style></head><body><div class="bespoke-marp-osc"><button data-bespoke-marp-osc="prev" tabindex="-1" title="Previous slide">Previous slide</button><span data-bespoke-marp-osc="page"></span><button data-bespoke-marp-osc="next" tabindex="-1" title="Next slide">Next slide</button><button data-bespoke-marp-osc="fullscreen" tabindex="-1" title="Toggle fullscreen (f)">Toggle fullscreen</button></div><article id="presentation"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="1" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
+}</style></head><body><div class="bespoke-marp-osc"><button data-bespoke-marp-osc="prev" tabindex="-1" title="Previous slide">Previous slide</button><span data-bespoke-marp-osc="page"></span><button data-bespoke-marp-osc="next" tabindex="-1" title="Next slide">Next slide</button><button data-bespoke-marp-osc="fullscreen" tabindex="-1" title="Toggle fullscreen (f)">Toggle fullscreen</button></div><article id="presentation"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="1" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <h1>REFACTORING ELIXIR FOR MAINTAINABILITY</h1>
 <h5>By Dave Lucia</h5>
+<h5>Platform Architect @ SimpleBet</h5>
 <h5><code>@davydog187</code></h5>
-<footer>Refactoring Elixir for Maintainability</footer>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="2" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
-<h1>~~REFACTORING ELIXIR FOR MAINTAINABILITY~~</h1>
-<h1>Leveraging Protocols and Behaviours to write better designed Elixir programs</h1>
-<footer>Refactoring Elixir for Maintainability</footer>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="3" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
-<h1>The Problem</h1>
-<p>Elixir is a very expressive language that offers syntactic features that are new and exciting when coming from other languages. Beginners tend to overuse features such as pattern matching and multiple function heads because of their novelty, while missing opportunities to make their code more generic and workable. Additionally, powerful language features such as protocols and behaviours are often overlooked due to their relative complexity.</p>
-<footer>Refactoring Elixir for Maintainability</footer>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="4" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
-<ol>
-<li>Beginners love pattern match, and overuse it</li>
-<li>Protocols are a higher level concept with unclear applications</li>
-<li>Behaviours don't seem useful when first starting out, and its unclear when to use them</li>
-</ol>
-<footer>Refactoring Elixir for Maintainability</footer>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="5" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
-<h1>What will we do for the next 20 minutes?</h1>
-<ol>
-<li>Write some bad code in Phoenix</li>
-<li>Make it better with Protocols</li>
-<li>Learn a bit about how Protocols work</li>
-<li>Make the code EVEN BETTER with behaviours</li>
-</ol>
-<footer>Refactoring Elixir for Maintainability</footer>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="6" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
-<h1>Who is this guy?</h1>
-<h2>Dave Lucia</h2>
-<p>Currently</p>
-<ul>
-<li>Platform Software Architect @ SimpleBet (Elixir + Rust)</li>
-</ul>
-<p>Formerly</p>
-<ul>
-<li>Founding team member of The Outline (Elixir + Javascript)</li>
-<li><a href="http://Bloomberg.com">Bloomberg.com</a></li>
-</ul>
-<footer>Refactoring Elixir for Maintainability</footer>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="7" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
-<h1>What got me excited about Elixir?</h1>
-<h1>Pattern matching is <img class="emoji" draggable="false" alt="🆒" src="https://twemoji.maxcdn.com/2/svg/1f192.svg" data-marp-twemoji=""/></h1>
-<pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foo</span></span>(%{} = map) <span class="hljs-keyword">do</span>
-  <span class="hljs-comment"># map stuff</span>
-<span class="hljs-keyword">end</span>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="2" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<h3>When I was a beginner...</h3>
+<h4>I wrote modules and functions that leveraged pattern matching</h4>
+<pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-class"><span class="hljs-keyword">defmodule</span> <span class="hljs-title">MyModule</span></span> <span class="hljs-keyword">do</span>
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foo</span></span>(atom) <span class="hljs-keyword">when</span> is_atom(atom) <span class="hljs-keyword">do</span>
-  <span class="hljs-comment"># atom stuff</span>
-<span class="hljs-keyword">end</span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foo</span></span>(binary) <span class="hljs-keyword">when</span> is_binary(binary), <span class="hljs-symbol">do:</span> String.upcase(binary)
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foo</span></span>(<span class="hljs-string">""</span> &lt;&gt; binary) <span class="hljs-keyword">do</span>
-  <span class="hljs-comment"># binary stuff</span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foo</span></span>(%MyStruct{} = struct), <span class="hljs-symbol">do:</span> struct.message
 <span class="hljs-keyword">end</span>
 </span></span></foreignObject></svg></code></pre>
-<footer>Refactoring Elixir for Maintainability</footer>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="8" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
-<h1>TODO write an example of excessive pattern matching</h1>
-<footer>Refactoring Elixir for Maintainability</footer>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="3" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<h3>But... <img class="emoji" draggable="false" alt="🤔" src="https://twemoji.maxcdn.com/2/svg/1f914.svg" data-marp-twemoji=""/></h3>
+<ol>
+<li>When does <strong>Pattern Matching</strong> get in the way of good code? <img class="emoji" draggable="false" alt="🤖" src="https://twemoji.maxcdn.com/2/svg/1f916.svg" data-marp-twemoji=""/></li>
+<li>What patterns can reduce <strong>Code Duplication</strong>? <img class="emoji" draggable="false" alt="💻" src="https://twemoji.maxcdn.com/2/svg/1f4bb.svg" data-marp-twemoji=""/> <img class="emoji" draggable="false" alt="💻" src="https://twemoji.maxcdn.com/2/svg/1f4bb.svg" data-marp-twemoji=""/> <img class="emoji" draggable="false" alt="💻" src="https://twemoji.maxcdn.com/2/svg/1f4bb.svg" data-marp-twemoji=""/></li>
+<li><strong>Protocols</strong> and <strong>Behaviours</strong> - When are they useful? <img class="emoji" draggable="false" alt="🔨" src="https://twemoji.maxcdn.com/2/svg/1f528.svg" data-marp-twemoji=""/></li>
+</ol>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="9" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="4" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<h1>What will we do for the next 20 minutes?</h1>
+<ol>
+<li><img class="emoji" draggable="false" alt="⚠️" src="https://twemoji.maxcdn.com/2/svg/26a0.svg" data-marp-twemoji=""/> Consider when to <strong>Pattern Match</strong></li>
+<li><img class="emoji" draggable="false" alt="❌" src="https://twemoji.maxcdn.com/2/svg/274c.svg" data-marp-twemoji=""/> Write some bad <strong>Elixir</strong> Code</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> Make it better with <strong>Protocols</strong></li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> Learn a bit about how <strong>Protocols</strong> work</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> Make the code <em>even better</em> with <strong>Behaviours</strong></li>
+</ol>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;" data-marpit-advanced-background="background" data-marpit-advanced-background-split="right"><div data-marpit-advanced-background-container="true"><figure style="background-image:url(&quot;assets/marissa_pearl_wedding.jpg&quot;);"></figure></div></section></foreignObject><foreignObject width="50%" height="720"><section id="5" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;" data-marpit-advanced-background="content" data-marpit-advanced-background-split="right">
+<h1>Who is this guy??</h1>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
+</section>
+</foreignObject><foreignObject width="1280" height="720" data-marpit-advanced-background="pseudo"><section style="" data-marpit-advanced-background="pseudo"></section></foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="6" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<h3>Currently</h3>
+<ul>
+<li>Husband and Dog dad</li>
+<li><strong>SimpleBet</strong> - Platform Software Architect - <strong>Elixir  | Rust</strong></li>
+</ul>
+<h3>Formerly</h3>
+<ul>
+<li><strong>The Outline</strong> - Founding team member - <strong>Elixir | JavaScript</strong></li>
+<li><strong>Bloomberg</strong> - Senior Developer - <em><strong>JavaScript | C++</strong></em></li>
+</ul>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="7" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<h4>Pattern matching is <img class="emoji" draggable="false" alt="🆒" src="https://twemoji.maxcdn.com/2/svg/1f192.svg" data-marp-twemoji=""/></h4>
+<pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-class"><span class="hljs-keyword">defmodule</span> <span class="hljs-title">Expng</span></span> <span class="hljs-keyword">do</span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">png_parse</span></span>(&lt;&lt; <span class="hljs-number">0x89</span>, <span class="hljs-number">0x50</span>, <span class="hljs-number">0x4E</span>, <span class="hljs-number">0x47</span>, <span class="hljs-number">0x0D</span>, <span class="hljs-number">0x0A</span>, <span class="hljs-number">0x1A</span>, <span class="hljs-number">0x0A</span>,
+                 _length :: size(<span class="hljs-number">32</span>),
+                 <span class="hljs-string">"IHDR"</span>,
+                 width :: size(<span class="hljs-number">32</span>),
+                 height :: size(<span class="hljs-number">32</span>),
+                 bit_depth,
+                 color_type,
+                 compression_method,
+                 filter_method,
+                 interlace_method,
+                 _crc :: size(<span class="hljs-number">32</span>),
+                 chunks :: binary&gt;&gt;) <span class="hljs-keyword">do</span>
+</span></span></foreignObject></svg></code></pre>
+<h6>Source: <a href="https://zohaib.me/binary-pattern-matching-in-elixir/">https://zohaib.me/binary-pattern-matching-in-elixir/</a></h6>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="8" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<h1>Pattern matching can be a novelty</h1>
+<pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foo</span></span>(%Post{<span class="hljs-symbol">comment:</span> %Comment{<span class="hljs-symbol">author:</span> %Author{<span class="hljs-symbol">favorite_pet:</span> pet}), <span class="hljs-symbol">do:</span> pet
+</span></span></foreignObject></svg></code></pre>
+<h3>VS</h3>
+<pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foo</span></span>(%Post{} = post), <span class="hljs-symbol">do:</span> post.comment.author.favorite_pet
+</span></span></foreignObject></svg></code></pre>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="9" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<h3><em>Don't</em> Pattern match in function heads</h3>
+<h4><img class="emoji" draggable="false" alt="❌" src="https://twemoji.maxcdn.com/2/svg/274c.svg" data-marp-twemoji=""/> To extract nested datastructures</h4>
+<h4><img class="emoji" draggable="false" alt="❌" src="https://twemoji.maxcdn.com/2/svg/274c.svg" data-marp-twemoji=""/> To guard against every possible type</h4>
+<pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-comment"># This is overly defensive, this should be a programmer error</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">render_post</span></span>(%Comment{} = _comment), <span class="hljs-keyword">do</span> <span class="hljs-symbol">:error</span>
+</span></span></foreignObject></svg></code></pre>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="10" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<h3><em>Do</em> Pattern match in function heads when..</h3>
+<h4><img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> It makes API / Context boundaries explicit</h4>
+<h4><img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> Matching on result types</h4>
+<pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foo</span></span>({<span class="hljs-symbol">:ok</span>, value}), <span class="hljs-symbol">do:</span> value
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foo</span></span>({<span class="hljs-symbol">:error</span>, reason}), <span class="hljs-symbol">do:</span> reason
+
+</span></span></foreignObject></svg></code></pre>
+<h4><img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> Parsing binary values</h4>
+<h4><img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> You've considered the tradeoffs</h4>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="11" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<h1>Case Study</h1>
 <h1>Let's build a blog <img class="emoji" draggable="false" alt="📰" src="https://twemoji.maxcdn.com/2/svg/1f4f0.svg" data-marp-twemoji=""/></h1>
-<footer>Refactoring Elixir for Maintainability</footer>
+<h2>Using <em>Phoenix</em> and <em>Ecto</em></h2>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="10" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="12" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<h1>Post Data Model</h1>
 <pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-class"><span class="hljs-keyword">defmodule</span> <span class="hljs-title">Blog.Post</span></span> <span class="hljs-keyword">do</span>
   <span class="hljs-keyword">use</span> Blog.Web, <span class="hljs-symbol">:model</span>
 
@@ -167,6 +206,10 @@ article#presentation > svg[data-marpit-svg] > foreignObject[data-marpit-advanced
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
 </span></span></foreignObject></svg></code></pre>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="13" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<h1>Post Template</h1>
 <pre><code class="language-eex"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>&lt;article&gt;
   &lt;header&gt;
     &lt;h1&gt;&lt;%= @post.title %&gt;&lt;/h1&gt;
@@ -177,13 +220,20 @@ article#presentation > svg[data-marpit-svg] > foreignObject[data-marpit-advanced
   &lt;/section&gt;
 &lt;/article&gt;
 </span></span></foreignObject></svg></code></pre>
-<footer>Refactoring Elixir for Maintainability</footer>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="11" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="14" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <h1>Let's <img class="emoji" draggable="false" alt="🌶" src="https://twemoji.maxcdn.com/2/svg/1f336.svg" data-marp-twemoji=""/> it up with some Markdown</h1>
-<footer>Refactoring Elixir for Maintainability</footer>
+<pre><code class="language-md"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-section"># Markdown time!</span>
+
+<span class="hljs-emphasis">*Hello*</span> <span class="hljs-strong">**World**</span>!
+
+[<span class="hljs-string">Code BEAM SF</span>](<span class="hljs-link">https://codesync.global/conferences/code-beam-sf-2019/</span>)
+</span></span></foreignObject></svg></code></pre>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="12" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="15" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<h1>Expose a function to render Markdown in templates</h1>
 <pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-class"><span class="hljs-keyword">defmodule</span> <span class="hljs-title">Blog.Web.PostView</span></span> <span class="hljs-keyword">do</span>
   <span class="hljs-keyword">use</span> Blog.Web, <span class="hljs-symbol">:view</span>
 
@@ -192,6 +242,9 @@ article#presentation > svg[data-marpit-svg] > foreignObject[data-marpit-advanced
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
 </span></span></foreignObject></svg></code></pre>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="16" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-class"><span class="hljs-keyword">defmodule</span> <span class="hljs-title">Blog.Markdown</span></span> <span class="hljs-keyword">do</span>
 
   <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_html</span></span>(binary) <span class="hljs-keyword">when</span> is_binary(binary) <span class="hljs-keyword">do</span>
@@ -199,23 +252,23 @@ article#presentation > svg[data-marpit-svg] > foreignObject[data-marpit-advanced
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
 </span></span></foreignObject></svg></code></pre>
-<footer>Refactoring Elixir for Maintainability</footer>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="13" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="17" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <h1>Render the body as Markdown</h1>
 <pre><code class="language-eex"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>&lt;section&gt;
-  &lt;%# Convert the markdown -&gt; HTML %&gt;
+  &lt;%# Convert the Markdown -&gt; HTML %&gt;
   &lt;%= render_markdown @post.body %&gt;
 &lt;/section&gt;
 </span></span></foreignObject></svg></code></pre>
-<footer>Refactoring Elixir for Maintainability</footer>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="14" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="18" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <h1>Our HTML is being escaped <img class="emoji" draggable="false" alt="😢" src="https://twemoji.maxcdn.com/2/svg/1f622.svg" data-marp-twemoji=""/></h1>
 <p><img src="assets/escaped_html.png" alt="" /></p>
-<footer>Refactoring Elixir for Maintainability</footer>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="15" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="19" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <h2><code>Phoenix.render/3</code> returns a safe tuple? <img class="emoji" draggable="false" alt="😯" src="https://twemoji.maxcdn.com/2/svg/1f62f.svg" data-marp-twemoji=""/></h2>
 <pre><code><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>iex(<span class="hljs-number">2</span>)&gt; <span class="hljs-symbol">Phoenix</span>.<span class="hljs-symbol">View</span>.render(<span class="hljs-symbol">Blog</span>.<span class="hljs-symbol">Web</span>.<span class="hljs-symbol">PostView</span>, <span class="hljs-string">"show.html"</span>, post: post)
 {:safe,
@@ -228,22 +281,25 @@ article#presentation > svg[data-marpit-svg] > foreignObject[data-marpit-advanced
 <h4>We can see our escaped HTML</h4>
 <pre><code><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-string">"&amp;lt;p&amp;gt;&amp;lt;em&amp;gt;Hello&amp;lt;/em&amp;gt; &amp;lt;strong&amp;gt;World&amp;lt;"</span>
 </span></span></foreignObject></svg></code></pre>
-<footer>Refactoring Elixir for Maintainability</footer>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="16" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="20" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <blockquote>
 <p>The safe tuple annotates that our template is safe and that we don't need to escape its contents because all data has already been encoded.</p>
 </blockquote>
 <h1>Thanks for keeping us safe, Phoenix <img class="emoji" draggable="false" alt="😉" src="https://twemoji.maxcdn.com/2/svg/1f609.svg" data-marp-twemoji=""/></h1>
-<footer>Refactoring Elixir for Maintainability</footer>
+<pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-comment"># Pseudo typespec</span>
+<span class="hljs-variable">@spec</span> Phoenix.View.render(<span class="hljs-keyword">module</span>(), binary(), term()) :: {<span class="hljs-symbol">:safe</span>, list()}
+</span></span></foreignObject></svg></code></pre>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="17" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="21" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <h4>We need our Markdown rendered HTML to go from</h4>
 <h4><code>iodata</code> <img class="emoji" draggable="false" alt="👉" src="https://twemoji.maxcdn.com/2/svg/1f449.svg" data-marp-twemoji=""/> <code>{:safe, iodata}</code></h4>
-<footer>Refactoring Elixir for Maintainability</footer>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="18" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
-<h2><code>render_markdown/1</code> now marks the HTML as safe</h2>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="22" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<h4><code>render_markdown/1</code> now marks the HTML as safe</h4>
 <pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">render_markdown</span></span>(binary) <span class="hljs-keyword">do</span>
   binary
   |&gt; Markdown.to_html()
@@ -251,34 +307,44 @@ article#presentation > svg[data-marpit-svg] > foreignObject[data-marpit-advanced
 <span class="hljs-keyword">end</span>
 </span></span></foreignObject></svg></code></pre>
 <p><img src="assets/safe_html.png" alt="" /></p>
-<footer>Refactoring Elixir for Maintainability</footer>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="19" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
-<h2><img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/>  The Good</h2>
-<p>we can render Markdown in templates</p>
-<h2><img class="emoji" draggable="false" alt="❌" src="https://twemoji.maxcdn.com/2/svg/274c.svg" data-marp-twemoji=""/> The Bad</h2>
-<p>We need have to remember to use the <code>render_markdown/1</code> function</p>
-<footer>Refactoring Elixir for Maintainability</footer>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="23" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<h2>The Good</h2>
+<p><img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> We've built the world's simplest blog<br />
+<img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> We can render Markdown in templates</p>
+<h2>The Bad</h2>
+<p><img class="emoji" draggable="false" alt="❌" src="https://twemoji.maxcdn.com/2/svg/274c.svg" data-marp-twemoji=""/> We need have to remember to use the <code>render_markdown/1</code> function for any field we want to support Markdown</p>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="20" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="24" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<h1>TODO write example that illustrates excessive function calls to <code>render_markdown/1</code></h1>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="25" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <h1>We're here to Refactor for Maintainability <img class="emoji" draggable="false" alt="™️" src="https://twemoji.maxcdn.com/2/svg/2122.svg" data-marp-twemoji=""/></h1>
 <h2>Let's refactor by leveraging Protocols</h2>
-<footer>Refactoring Elixir for Maintainability</footer>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="21" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
-<h2>Protocols help you acheive the Open/Closed Principle  in Elixir</h2>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="26" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<h2>Protocols help you achieve the Open/Closed Principle  in Elixir</h2>
 <p><img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> Open for extension<br />
 <img class="emoji" draggable="false" alt="❌" src="https://twemoji.maxcdn.com/2/svg/274c.svg" data-marp-twemoji=""/> Closed for modification</p>
 <blockquote>
-<p>Protocols are a mechanism to achieve polymorphism in Elixir. Dispatching on a protocol is available to any data type as long as it implements the protocol.</p>
+<p>Protocols are a mechanism to achieve polymorphism in Elixir. Dispatching on a protocol is available to any data type as long as it implements the protocol. - <em>Elixir Documentation</em></p>
 </blockquote>
-<footer>Refactoring Elixir for Maintainability</footer>
+<h4>TODO add link to docs</h4>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="22" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="27" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<h1>TODO make a pseudo protocol consolodation example</h1>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="28" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <h2>We can extend the rendering power of Phoenix by leveraging its <code>Phoenix.HTML.Safe</code> Protocol</h2>
-<footer>Refactoring Elixir for Maintainability</footer>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="23" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="29" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-class"><span class="hljs-keyword">defmodule</span> <span class="hljs-title">Blog.Markdown</span></span> <span class="hljs-keyword">do</span>
   defstruct <span class="hljs-symbol">text:</span> <span class="hljs-string">""</span>
 
@@ -294,9 +360,9 @@ article#presentation > svg[data-marpit-svg] > foreignObject[data-marpit-advanced
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
 </span></span></foreignObject></svg></code></pre>
-<footer>Refactoring Elixir for Maintainability</footer>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="24" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="30" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>post = put_in(post.body, Markdown.new(post.body))
 
 Phoenix.View.render(
@@ -316,26 +382,120 @@ Phoenix.View.render(
   &lt;/section&gt;
 &lt;/article&gt;
 </span></span></foreignObject></svg></code></pre>
-<footer>Refactoring Elixir for Maintainability</footer>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="25" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="31" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <h1>But wait, we can do better</h1>
-<footer>Refactoring Elixir for Maintainability</footer>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="26" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="32" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <h2>We still need to remember to wrap in a <code>Markdown</code> struct</h2>
 <pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>post = put_in(post.body, Markdown.new(post.body))
 </span></span></foreignObject></svg></code></pre>
 <h3>How can we refactor further? <img class="emoji" draggable="false" alt="🤔" src="https://twemoji.maxcdn.com/2/svg/1f914.svg" data-marp-twemoji=""/></h3>
-<footer>Refactoring Elixir for Maintainability</footer>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="27" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="33" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <h1>Behaviours <img class="emoji" draggable="false" alt="😎" src="https://twemoji.maxcdn.com/2/svg/1f60e.svg" data-marp-twemoji=""/></h1>
-<footer>Refactoring Elixir for Maintainability</footer>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="28" data-footer="Refactoring Elixir for Maintainability" data-theme="gaia" style="--footer:Refactoring Elixir for Maintainability;--theme:gaia;">
-<h1></h1>
-<footer>Refactoring Elixir for Maintainability</footer>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="34" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<h1>Behaviours are interfaces <img class="emoji" draggable="false" alt="💻" src="https://twemoji.maxcdn.com/2/svg/1f4bb.svg" data-marp-twemoji=""/></h1>
+<pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">Food</span></span> <span class="hljs-keyword">do</span>
+  <span class="hljs-variable">@callback</span> is_hotdog?(any()) :: boolean()
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">Hotdog</span></span> <span class="hljs-keyword">do</span>
+  defstruct [<span class="hljs-symbol">:val</span>]
+
+  <span class="hljs-variable">@behaviour</span> Food
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">is_hotdog?</span></span>(%Hotdog{}), <span class="hljs-symbol">do:</span> <span class="hljs-keyword">true</span>
+<span class="hljs-keyword">end</span>
+</span></span></foreignObject></svg></code></pre>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="35" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<h1>Lets make <code>%Markdown{}</code> implement the <code>Ecto.Type</code> Behaviour <img class="emoji" draggable="false" alt="💵" src="https://twemoji.maxcdn.com/2/svg/1f4b5.svg" data-marp-twemoji=""/></h1>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="36" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-class"><span class="hljs-keyword">defmodule</span> <span class="hljs-title">Blog.Post</span></span> <span class="hljs-keyword">do</span>
+  <span class="hljs-keyword">use</span> Blog.Web, <span class="hljs-symbol">:model</span>
+
+  schema <span class="hljs-string">"posts"</span> <span class="hljs-keyword">do</span>
+    field <span class="hljs-symbol">:title</span>, <span class="hljs-symbol">:string</span>
+    field <span class="hljs-symbol">:author</span>, <span class="hljs-symbol">:string</span>
+    field <span class="hljs-symbol">:body</span>, Blog.Markdown <span class="hljs-comment"># The custom Ecto.Type</span>
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+</span></span></foreignObject></svg></code></pre>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="37" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-class"><span class="hljs-keyword">defmodule</span> <span class="hljs-title">Blog.Markdown</span></span> <span class="hljs-keyword">do</span>
+  <span class="hljs-variable">@behaviour</span> Ecto.Type
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">type</span></span>, <span class="hljs-symbol">do:</span> <span class="hljs-symbol">:string</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">cast</span></span>(binary) <span class="hljs-keyword">when</span> is_binary(binary) <span class="hljs-keyword">do</span>
+    {<span class="hljs-symbol">:ok</span>, %Markdown{<span class="hljs-symbol">text:</span> binary}}
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">load</span></span>(binary) <span class="hljs-keyword">when</span> is_binary(binary) <span class="hljs-keyword">do</span>
+    {<span class="hljs-symbol">:ok</span>, %Markdown{<span class="hljs-symbol">text:</span> binary}}
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dump</span></span>(%Markdown{<span class="hljs-symbol">text:</span> binary}) <span class="hljs-keyword">when</span> is_binary(binary) <span class="hljs-keyword">do</span>
+    {<span class="hljs-symbol">:ok</span>, binary}
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+</span></span></foreignObject></svg></code></pre>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="38" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<h3>Now <code>Post.body</code> is always a <code>%Markdown{}</code></h3>
+<pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>post = Repo.get!(Post, <span class="hljs-number">1</span>)
+
+<span class="hljs-keyword">true</span> = match?(%Markdown{}, post.body)
+
+<span class="hljs-comment"># No longer needed</span>
+<span class="hljs-comment"># post = put_in(post.body, Markdown.new(post.body))</span>
+
+Phoenix.View.render(
+  Blog.Web.PostView,
+  <span class="hljs-string">"show.html"</span>,
+  <span class="hljs-symbol">post:</span> post
+)
+</span></span></foreignObject></svg></code></pre>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="39" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<h1>What have we learned? TODO this slide sucks</h1>
+<ol>
+<li>Pattern matching is great, but don't overuse it</li>
+<li>Protocols can make function calls implicit</li>
+<li>Behaviours can be leveraged to plug into existing systems</li>
+</ol>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="40" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<h1>For more info, read my blog post:</h1>
+<h1><a href="https://blog.usejournal.com/beyond-functions-in-elixir-refactoring-for-maintainability-5c73daba77f3">Beyond functions in Elixir: Refactoring for Maintainability</a></h1>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="41" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<p>Presentation written in the <strong>Marp framework</strong> by Yuki Hattori, a Markdown based presentation framework.</p>
+<h4>Marp - <a href="https://yhatt.github.io/marp/">https://yhatt.github.io/marp/</a></h4>
+<h4>Presentation - <a href="https://github.com/davydog187/code_beam_presentation">https://github.com/davydog187/code_beam_presentation</a></h4>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="42" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<h1>Thanks!</h1>
+<h5>By Dave Lucia</h5>
+<h5>Platform Architect @ SimpleBet</h5>
+<h5><code>@davydog187</code></h5>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
 </foreignObject></svg></article><script>!function(){"use strict";function e(e){var n=i([["iOS",/iP(hone|od|ad)/],["Android OS",/Android/],["BlackBerry OS",/BlackBerry|BB10/],["Windows Mobile",/IEMobile/],["Amazon OS",/Kindle/],["Windows 3.11",/Win16/],["Windows 95",/(Windows 95)|(Win95)|(Windows_95)/],["Windows 98",/(Windows 98)|(Win98)/],["Windows 2000",/(Windows NT 5.0)|(Windows 2000)/],["Windows XP",/(Windows NT 5.1)|(Windows XP)/],["Windows Server 2003",/(Windows NT 5.2)/],["Windows Vista",/(Windows NT 6.0)/],["Windows 7",/(Windows NT 6.1)/],["Windows 8",/(Windows NT 6.2)/],["Windows 8.1",/(Windows NT 6.3)/],["Windows 10",/(Windows NT 10.0)/],["Windows ME",/Windows ME/],["Open BSD",/OpenBSD/],["Sun OS",/SunOS/],["Linux",/(Linux)|(X11)/],["Mac OS",/(Mac_PowerPC)|(Macintosh)/],["QNX",/QNX/],["BeOS",/BeOS/],["OS/2",/OS\/2/],["Search Bot",/(nuhk)|(Googlebot)|(Yammybot)|(Openbot)|(Slurp)|(MSNBot)|(Ask Jeeves\/Teoma)|(ia_archiver)/]]).filter(function(n){return n.rule&&n.rule.test(e)})[0];return n?n.name:null}function n(){return"undefined"!=typeof process&&process.version&&{name:"node",version:process.version.slice(1),os:process.platform}}function t(n){var t=i([["aol",/AOLShield\/([0-9\._]+)/],["edge",/Edge\/([0-9\._]+)/],["yandexbrowser",/YaBrowser\/([0-9\._]+)/],["vivaldi",/Vivaldi\/([0-9\.]+)/],["kakaotalk",/KAKAOTALK\s([0-9\.]+)/],["samsung",/SamsungBrowser\/([0-9\.]+)/],["chrome",/(?!Chrom.*OPR)Chrom(?:e|ium)\/([0-9\.]+)(:?\s|$)/],["phantomjs",/PhantomJS\/([0-9\.]+)(:?\s|$)/],["crios",/CriOS\/([0-9\.]+)(:?\s|$)/],["firefox",/Firefox\/([0-9\.]+)(?:\s|$)/],["fxios",/FxiOS\/([0-9\.]+)/],["opera",/Opera\/([0-9\.]+)(?:\s|$)/],["opera",/OPR\/([0-9\.]+)(:?\s|$)$/],["ie",/Trident\/7\.0.*rv\:([0-9\.]+).*\).*Gecko$/],["ie",/MSIE\s([0-9\.]+);.*Trident\/[4-7].0/],["ie",/MSIE\s(7\.0)/],["bb10",/BB10;\sTouch.*Version\/([0-9\.]+)/],["android",/Android\s([0-9\.]+)/],["ios",/Version\/([0-9\._]+).*Mobile.*Safari.*/],["safari",/Version\/([0-9\._]+).*Safari/],["facebook",/FBAV\/([0-9\.]+)/],["instagram",/Instagram\s([0-9\.]+)/],["ios-webview",/AppleWebKit\/([0-9\.]+).*Mobile/]]);if(!n)return null;var o=t.map(function(e){var t=e.rule.exec(n),i=t&&t[1].split(/[._]/).slice(0,3);return i&&i.length<3&&(i=i.concat(1==i.length?[0,0]:[0])),t&&{name:e.name,version:i.join(".")}}).filter(Boolean)[0]||null;return o&&(o.os=e(n)),/alexa|bot|crawl(er|ing)|facebookexternalhit|feedburner|google web preview|nagios|postrank|pingdom|slurp|spider|yahoo!|yandex/i.test(n)&&((o=o||{}).bot=!0),o}function i(e){return e.map(function(e){return{name:e[0],rule:e[1]}})}var o=function(){return"undefined"!=typeof navigator?t(navigator.userAgent):n()},r=o;let s;const a=["android","bb10","crios","facebook","fxios","instagram","ios-webview","ios","phantomjs","safari"];function l(){Array.from(document.getElementsByTagName("svg"),e=>{if(e.hasAttribute("data-marpit-svg")){const{clientHeight:n,clientWidth:t}=e;e.style.transform||(e.style.transform="translateZ(0)");const{width:i,height:o}=e.viewBox.baseVal,r=Math.min(n/o,t/i);Array.from(e.querySelectorAll(":scope > foreignObject"),e=>{const s=e.x.baseVal.value,a=e.y.baseVal.value;Array.from(e.querySelectorAll(":scope > section"),e=>{e.style.transformOrigin||(e.style.transformOrigin="0 0");const l=(t-r*i)/2-s,d=(n-r*o)/2-a;e.style.transform=`translate3d(${l}px,${d}px,0) scale(${r}) translate(${s}px,${a}px)`})})}})}const d="data-marp-fitting",c="data-marp-fitting-code",u="data-marp-fitting-math",f=(e,n,t)=>{if(e.getAttribute(n)!==t)return e.setAttribute(n,t),!0};!function(e=!0){const n=()=>{for(const e of function(){if(!s){s=[];const{name:e}=r()||{};a.includes(e)&&s.push(l)}return s}())e();Array.from(document.querySelectorAll(`svg[${d}="svg"]`),e=>{const n=e.firstChild,t=n.firstChild,{scrollWidth:i,scrollHeight:o}=t;let r,s=1;if(e.hasAttribute(c)&&(r=e.parentElement.parentElement),e.hasAttribute(u)&&(r=e.parentElement),r){const e=getComputedStyle(r),n=Math.ceil(r.clientWidth-parseFloat(e.paddingLeft)-parseFloat(e.paddingRight));n&&(s=n)}const a=Math.max(i,s),l=Math.max(o,1),d=`0 0 ${a} ${l}`;f(n,"width",`${a}`),f(n,"height",`${l}`),f(e,"preserveAspectRatio",getComputedStyle(e).getPropertyValue("--preserve-aspect-ratio")||"xMinYMin meet"),f(e,"viewBox",d)&&e.classList.toggle("__reflow__")}),e&&window.requestAnimationFrame(n)};n()}()}();
 </script><script>!function(){"use strict";var e={from:function(e,n){var t=1===(e.parent||e).nodeType?e.parent||e:document.querySelector(e.parent||e),r=[].filter.call("string"==typeof e.slides?t.querySelectorAll(e.slides):e.slides||t.children,function(e){return"SCRIPT"!==e.nodeName}),i=r[0],l={},o=function(e,n){r[e]&&(a("deactivate",u(i,n)),i=r[e],a("activate",u(i,n)))},s=function(e,n){var t=r.indexOf(i)+e;a(e>0?"next":"prev",u(i,n))&&o(t,n)},c=function(e,n){l[e]=(l[e]||[]).filter(function(e){return e!==n})},a=function(e,n){return(l[e]||[]).reduce(function(e,t){return e&&!1!==t(n)},!0)},u=function(e,n){return(n=n||{}).index=r.indexOf(e),n.slide=e,n},d={on:function(e,n){return(l[e]||(l[e]=[])).push(n),c.bind(null,e,n)},off:c,fire:a,slide:function(e,n){if(!arguments.length)return r.indexOf(i);a("slide",u(r[e],n))&&o(e,n)},next:s.bind(null,1),prev:s.bind(null,-1),parent:t,slides:r};return(n||[]).forEach(function(e){e(d)}),o(0),d}},n=function(){return function(e){e.slides.forEach(function(e){e.addEventListener("keydown",function(e){(/INPUT|TEXTAREA|SELECT/.test(e.target.nodeName)||"true"===e.target.contentEditable)&&e.stopPropagation()})})}};function t(e){e.parent.classList.add("bespoke-marp-parent"),e.slides.map(e=>e.classList.add("bespoke-marp-slide")),e.on("activate",n=>{e.slides.map(e=>e.classList.remove("bespoke-marp-active")),n.slide.classList.add("bespoke-marp-active")})}function r(e=2e3){return n=>{let t;function r(){t&&clearTimeout(t),t=setTimeout(()=>{n.parent.classList.add("bespoke-marp-inactive")},e),n.parent.classList.remove("bespoke-marp-inactive")}document.addEventListener("mousedown",r),document.addEventListener("mousemove",r),document.addEventListener("touchend",r),setTimeout(r,0)}}var i,l=(function(e){var n,t,r,i,l,o;n="undefined"!=typeof window&&void 0!==window.document?window.document:{},t=e.exports,r="undefined"!=typeof Element&&"ALLOW_KEYBOARD_INPUT"in Element,i=function(){for(var e,t=[["requestFullscreen","exitFullscreen","fullscreenElement","fullscreenEnabled","fullscreenchange","fullscreenerror"],["webkitRequestFullscreen","webkitExitFullscreen","webkitFullscreenElement","webkitFullscreenEnabled","webkitfullscreenchange","webkitfullscreenerror"],["webkitRequestFullScreen","webkitCancelFullScreen","webkitCurrentFullScreenElement","webkitCancelFullScreen","webkitfullscreenchange","webkitfullscreenerror"],["mozRequestFullScreen","mozCancelFullScreen","mozFullScreenElement","mozFullScreenEnabled","mozfullscreenchange","mozfullscreenerror"],["msRequestFullscreen","msExitFullscreen","msFullscreenElement","msFullscreenEnabled","MSFullscreenChange","MSFullscreenError"]],r=0,i=t.length,l={};r<i;r++)if((e=t[r])&&e[1]in n){for(r=0;r<e.length;r++)l[t[0][r]]=e[r];return l}return!1}(),l={change:i.fullscreenchange,error:i.fullscreenerror},o={request:function(e){return new Promise(function(t){var l=i.requestFullscreen,o=function(){this.off("change",o),t()}.bind(this);e=e||n.documentElement,/ Version\/5\.1(?:\.\d+)? Safari\//.test(navigator.userAgent)?e[l]():e[l](r?Element.ALLOW_KEYBOARD_INPUT:{}),this.on("change",o)}.bind(this))},exit:function(){return new Promise(function(e){var t=function(){this.off("change",t),e()}.bind(this);n[i.exitFullscreen](),this.on("change",t)}.bind(this))},toggle:function(e){return this.isFullscreen?this.exit():this.request(e)},onchange:function(e){this.on("change",e)},onerror:function(e){this.on("error",e)},on:function(e,t){var r=l[e];r&&n.addEventListener(r,t,!1)},off:function(e,t){var r=l[e];r&&n.removeEventListener(r,t,!1)},raw:i},i?(Object.defineProperties(o,{isFullscreen:{get:function(){return Boolean(n[i.fullscreenElement])}},element:{enumerable:!0,get:function(){return n[i.fullscreenElement]}},enabled:{enumerable:!0,get:function(){return Boolean(n[i.fullscreenEnabled])}}}),t?e.exports=o:window.screenfull=o):t?e.exports=!1:window.screenfull=!1}(i={exports:{}},i.exports),i.exports);function o(e){e.fullscreen=(()=>l.toggle(document.body)),document.addEventListener("keydown",n=>{70!==n.which&&122!==n.which||n.altKey||n.ctrlKey||n.metaKey||!l.enabled||(e.fullscreen(),n.preventDefault())})}function s(e={}){const n=Object.assign({history:!0},e);return e=>{function t(){const n=parseInt(window.location.hash.slice(1),10);Number.isNaN(n)||function(n){const t=Math.max(0,Math.min(n,e.slides.length-1));t!==e.slide()&&e.slide(t)}(n-1)}setTimeout(()=>{t(),e.on("activate",e=>{n.history?window.location.hash=e.index+1:window.location.replace(`#${e.index+1}`)}),window.addEventListener("hashchange",t)},0)}}var c,a=function(e){return function(n){var t="vertical"!==e;document.addEventListener("keydown",function(e){(34==e.which||32==e.which&&!e.shiftKey||t&&39==e.which||!t&&40==e.which)&&n.next(),(33==e.which||32==e.which&&e.shiftKey||t&&37==e.which||!t&&38==e.which)&&n.prev()})}};function u(e={}){const n=Object.assign({interval:200},e);return e=>{a()(e),document.addEventListener("keydown",n=>{35===n.which&&e.slide(e.slides.length-1),36===n.which&&e.slide(0),38===n.which&&e.prev(),40===n.which&&e.next()});let t,r,i=0;e.parent.addEventListener("wheel",l=>{let o=!1;const s=(e,n)=>{e&&(o=o||function(e,n){return function(e,n){const t=n===c.X?"Width":"Height";return e[`client${t}`]<e[`scroll${t}`]}(e,n)&&function(e,n){const{overflow:t}=e,r=e[`overflow${n}`];return"auto"===t||"scroll"===t||"auto"===r||"scroll"===r}(getComputedStyle(e),n)}(e,n)),e&&e.parentElement&&s(e.parentElement,n)};if(0!==l.deltaX&&s(l.target,c.X),0!==l.deltaY&&s(l.target,c.Y),o)return;l.preventDefault(),r&&clearTimeout(r),r=setTimeout(()=>{t=0},n.interval);const a=Date.now()-i<n.interval,u=Math.sqrt(Math.pow(l.deltaX,2)+Math.pow(l.deltaY,2)),d=u<=t;if(t=u,a||d)return;let f;(l.deltaX>0||l.deltaY>0)&&(f="next"),(l.deltaX<0||l.deltaY<0)&&(f="prev"),f&&(e[f](),i=Date.now())})}}function d(e=".bespoke-marp-osc"){const n=document.querySelector(e);if(!n)return()=>{};const t=(e,t)=>{n.querySelectorAll(`[data-bespoke-marp-osc=${JSON.stringify(e)}]`).forEach(t)};return l.enabled||t("fullscreen",e=>e.style.display="none"),e=>{n.addEventListener("click",n=>{if(n.target instanceof HTMLElement)switch(n.target.dataset.bespokeMarpOsc){case"next":e.next();break;case"prev":e.prev();break;case"fullscreen":"function"==typeof e.fullscreen&&l.enabled&&e.fullscreen()}}),e.parent.appendChild(n),e.on("activate",({index:n})=>{t("page",t=>t.textContent=`Page ${n+1} of ${e.slides.length}`),t("prev",e=>e.disabled=0===n),t("next",t=>t.disabled=n===e.slides.length-1)}),l.onchange(()=>t("fullscreen",e=>e.classList.toggle("exit",l.isFullscreen)))}}!function(e){e.X="X",e.Y="Y"}(c||(c={}));const f=".bespoke-progress-bar";function h(e){e.on("activate",n=>{document.querySelectorAll(f).forEach(t=>{t.style.flexBasis=`${100*n.index/(e.slides.length-1)}%`})})}function p(e={}){const n=Object.assign({slope:Math.tan(-35*Math.PI/180),swipeThreshold:30},e);return e=>{let t;const r=e.parent,i=e=>{const n=r.getBoundingClientRect();return{x:e.pageX-(n.left+n.right)/2,y:e.pageY-(n.top+n.bottom)/2}};r.addEventListener("touchstart",e=>{t=1===e.touches.length?i(e.touches[0]):void 0}),r.addEventListener("touchmove",e=>{if(t)if(1===e.touches.length){e.preventDefault();const n=i(e.touches[0]),r=n.x-t.x,l=n.y-t.y;t.delta=Math.sqrt(Math.pow(Math.abs(r),2)+Math.pow(Math.abs(l),2)),t.radian=Math.atan2(r,l)}else t=void 0}),r.addEventListener("touchend",r=>{if(t){if(t.delta&&t.delta>=n.swipeThreshold){let i=t.radian-n.slope;i=(i+Math.PI)%(2*Math.PI)-Math.PI,e[i<0?"next":"prev"](),r.stopPropagation()}t=void 0}})}}e.from(document.getElementById("presentation"),[n(),t,r(),s({history:!1}),u(),o,h,p(),d()])}();

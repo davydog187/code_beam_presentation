@@ -12,3 +12,18 @@ This talk aims to identify common beginner mistakes when coming from other langu
 
 ### TARGET AUDIENCE
 This talk appeals to beginners and intermediate developers who are newer to Elixir and haven't written enough code to identify structural patterns that can lead to future headaches.
+
+
+### Development
+
+To build the presentation as a PDF, run
+
+```bash
+marp presentation.md --allow-local-files --pdf --theme gaia
+```
+
+To build the website, run
+
+```bash
+marp presentation.md --allow-local-files --html --theme gaia
+```
