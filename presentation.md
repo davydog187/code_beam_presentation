@@ -301,7 +301,7 @@ defprotocol Size do
 
   def size(string) when is_binary(string), do: byte_size(string)
   def size(map) when is_map(map), do: map_size(map)
-  def size(tuple) when is_tupe(tuple), do: tuple_size(tuple)
+  def size(tuple) when is_tuple(tuple), do: tuple_size(tuple)
 end
 ```
 ---
@@ -425,10 +425,10 @@ Phoenix.View.render(
 )
 ```
 ---
-# What have we learned? TODO this slide sucks
-1. Pattern matching is great, but don't overuse it
-2. Protocols can make function calls implicit
-3. Behaviours can be leveraged to plug into existing systems
+# Now we have
+:white_check_mark: Built a basic blog with Markdown support
+:white_check_mark: Simplified our templates by leveraging the Phoenix.HTML.Safe Protocol
+:white_check_mark: Automatically casted Markdown fields at the database level with Behaviours
 
 ---
 # For more info, read my blog post:

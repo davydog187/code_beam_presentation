@@ -383,7 +383,7 @@ article#presentation > svg[data-marpit-svg] > foreignObject[data-marpit-advanced
 
   <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">size</span></span>(string) <span class="hljs-keyword">when</span> is_binary(string), <span class="hljs-symbol">do:</span> byte_size(string)
   <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">size</span></span>(map) <span class="hljs-keyword">when</span> is_map(map), <span class="hljs-symbol">do:</span> map_size(map)
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">size</span></span>(tuple) <span class="hljs-keyword">when</span> is_tupe(tuple), <span class="hljs-symbol">do:</span> tuple_size(tuple)
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">size</span></span>(tuple) <span class="hljs-keyword">when</span> is_tuple(tuple), <span class="hljs-symbol">do:</span> tuple_size(tuple)
 <span class="hljs-keyword">end</span>
 </span></span></foreignObject></svg></code></pre>
 <footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
@@ -519,12 +519,10 @@ Phoenix.View.render(
 <footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="41" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
-<h1>What have we learned? TODO this slide sucks</h1>
-<ol>
-<li>Pattern matching is great, but don't overuse it</li>
-<li>Protocols can make function calls implicit</li>
-<li>Behaviours can be leveraged to plug into existing systems</li>
-</ol>
+<h1>Now we have</h1>
+<p><img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> Built a basic blog with Markdown support<br />
+<img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> Simplified our templates by leveraging the Phoenix.HTML.Safe Protocol<br />
+<img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> Automatically casted Markdown fields at the database level with Behaviours</p>
 <footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="42" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
