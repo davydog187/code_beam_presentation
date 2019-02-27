@@ -376,11 +376,11 @@ end
 ---
 # Lets make `%Markdown{}` implement the `Ecto.Type` Behaviour :dollar:
 ---
-* **Type**is the backing type of our Markdown field, which is :string
+* **Type** is the backing type of our Markdown field, which is `:string`
 
 * **Load** takes data from the database, converts it to `%Markdown{}`
 
-* **Dump**takes a `%Markdown{}`` struct, validates it, and returns a valid :string
+* **Dump** takes a `%Markdown{}` struct, validates it, and returns a valid `:string`
 
 * **Cast** is called when casting values for `Ecto.Changeset` or `Ecto.Query`.
 ---
@@ -446,7 +446,9 @@ Presentation written in the **Marp framework** by Yuki Hattori, a Markdown based
 
 #### Marp - https://yhatt.github.io/marp/
 
-#### Presentation - https://github.com/davydog187/code_beam_presentation
+#### Presentation - https://davydog187.github.io/code_beam_presentation
+
+#### Source  - https://github.com/davydog187/code_beam_presentation
 
 ---
 
