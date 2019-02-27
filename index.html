@@ -378,7 +378,7 @@ article#presentation > svg[data-marpit-svg] > foreignObject[data-marpit-advanced
 <footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="29" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
-<pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-class"><span class="hljs-keyword">defprotocol</span> <span class="hljs-title">Size</span></span> <span class="hljs-keyword">do</span>
+<pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-class"><span class="hljs-keyword">defmodule</span> <span class="hljs-title">Size</span></span> <span class="hljs-keyword">do</span>
   <span class="hljs-variable">@doc</span> <span class="hljs-string">"Calculates the size (and not the length!) of a data structure"</span>
 
   <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">size</span></span>(string) <span class="hljs-keyword">when</span> is_binary(string), <span class="hljs-symbol">do:</span> byte_size(string)

@@ -296,7 +296,7 @@ end
 ```
 ---
 ```elixir
-defprotocol Size do
+defmodule Size do
   @doc "Calculates the size (and not the length!) of a data structure"
 
   def size(string) when is_binary(string), do: byte_size(string)
