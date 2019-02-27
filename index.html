@@ -419,35 +419,38 @@ Phoenix.View.render(
   <span class="hljs-symbol">post:</span> post
 )
 </span></span></foreignObject></svg></code></pre>
-<pre><code class="language-eex"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>&lt;article&gt;
-  &lt;header&gt;
-    &lt;h1&gt;&lt;%= @post.title %&gt;&lt;/h1&gt;
-    &lt;address&gt;&lt;%= @post.author %&gt;&lt;/address&gt;
-  &lt;/header&gt;
-  &lt;section&gt;
-    &lt;%# render_markdown(@post.body) %&gt;
-    &lt;%= @post.body %&gt;
-  &lt;/section&gt;
-&lt;/article&gt;
-</span></span></foreignObject></svg></code></pre>
 <footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="33" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
-<h1>But wait, we can do better</h1>
+<pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>&lt;article&gt;
+  &lt;header&gt;
+    &lt;h1&gt;&lt;%= <span class="hljs-variable">@post</span>.title %&gt;&lt;<span class="hljs-regexp">/h1&gt;
+    &lt;address&gt;&lt;%= @post.author %&gt;&lt;/address</span>&gt;
+  &lt;<span class="hljs-regexp">/header&gt;
+  &lt;section&gt;
+    &lt;%# No longer needed -&gt; render_markdown(@post.body) %&gt;
+    &lt;%= @post.body %&gt;
+  &lt;/section</span>&gt;
+&lt;<span class="hljs-regexp">/article&gt;
+</span></span></span></foreignObject></svg></code></pre>
 <footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="34" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<h1>But wait, we can do better</h1>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="35" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <h2>We still need to remember to wrap in a <code>Markdown</code> struct</h2>
 <pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>post = put_in(post.body, Markdown.new(post.body))
 </span></span></foreignObject></svg></code></pre>
 <h3>How can we refactor further? <img class="emoji" draggable="false" alt="🤔" src="https://twemoji.maxcdn.com/2/svg/1f914.svg" data-marp-twemoji=""/></h3>
 <footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="35" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="36" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <h1>Behaviours <img class="emoji" draggable="false" alt="😎" src="https://twemoji.maxcdn.com/2/svg/1f60e.svg" data-marp-twemoji=""/></h1>
 <footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="36" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="37" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <h1>Behaviours are interfaces <img class="emoji" draggable="false" alt="💻" src="https://twemoji.maxcdn.com/2/svg/1f4bb.svg" data-marp-twemoji=""/></h1>
 <pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">Food</span></span> <span class="hljs-keyword">do</span>
   <span class="hljs-variable">@callback</span> is_hotdog?(any()) :: boolean()
@@ -463,11 +466,28 @@ Phoenix.View.render(
 </span></span></foreignObject></svg></code></pre>
 <footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="37" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="38" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <h1>Lets make <code>%Markdown{}</code> implement the <code>Ecto.Type</code> Behaviour <img class="emoji" draggable="false" alt="💵" src="https://twemoji.maxcdn.com/2/svg/1f4b5.svg" data-marp-twemoji=""/></h1>
 <footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="38" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="39" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+<ul>
+<li>
+<p><strong>Type</strong>is the backing type of our Markdown field, which is :string</p>
+</li>
+<li>
+<p><strong>Load</strong> takes data from the database, converts it to <code>%Markdown{}</code></p>
+</li>
+<li>
+<p><strong>Dump</strong>takes a `%Markdown{}`` struct, validates it, and returns a valid :string</p>
+</li>
+<li>
+<p><strong>Cast</strong> is called when casting values for <code>Ecto.Changeset</code> or <code>Ecto.Query</code>.</p>
+</li>
+</ul>
+<footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="40" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-class"><span class="hljs-keyword">defmodule</span> <span class="hljs-title">Blog.Post</span></span> <span class="hljs-keyword">do</span>
   <span class="hljs-keyword">use</span> Blog.Web, <span class="hljs-symbol">:model</span>
 
@@ -480,7 +500,7 @@ Phoenix.View.render(
 </span></span></foreignObject></svg></code></pre>
 <footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="39" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="41" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-class"><span class="hljs-keyword">defmodule</span> <span class="hljs-title">Blog.Markdown</span></span> <span class="hljs-keyword">do</span>
   <span class="hljs-variable">@behaviour</span> Ecto.Type
 
@@ -501,7 +521,7 @@ Phoenix.View.render(
 </span></span></foreignObject></svg></code></pre>
 <footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="40" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="42" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <h3>Now <code>Post.body</code> is always a <code>%Markdown{}</code></h3>
 <pre><code class="language-elixir"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>post = Repo.get!(Post, <span class="hljs-number">1</span>)
 
@@ -518,25 +538,25 @@ Phoenix.View.render(
 </span></span></foreignObject></svg></code></pre>
 <footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="41" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="43" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <h1>Now we have</h1>
 <p><img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> Built a basic blog with Markdown support<br />
 <img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> Simplified our templates by leveraging the Phoenix.HTML.Safe Protocol<br />
 <img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> Automatically casted Markdown fields at the database level with Behaviours</p>
 <footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="42" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="44" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <h1>For more info, read my blog post:</h1>
 <h1><a href="https://blog.usejournal.com/beyond-functions-in-elixir-refactoring-for-maintainability-5c73daba77f3">Beyond functions in Elixir: Refactoring for Maintainability</a></h1>
 <footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="43" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="45" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <p>Presentation written in the <strong>Marp framework</strong> by Yuki Hattori, a Markdown based presentation framework.</p>
 <h4>Marp - <a href="https://yhatt.github.io/marp/">https://yhatt.github.io/marp/</a></h4>
 <h4>Presentation - <a href="https://github.com/davydog187/code_beam_presentation">https://github.com/davydog187/code_beam_presentation</a></h4>
 <footer>Refactoring Elixir for Maintainability - @davydog187 - <a href="https://simplebet.io">https://simplebet.io</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="44" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="46" data-footer="Refactoring Elixir for Maintainability - @davydog187 - https://simplebet.io" data-theme="gaia" style="--theme:gaia;">
 <h1>Thanks!</h1>
 <h5>By Dave Lucia</h5>
 <h5>Platform Architect @ SimpleBet</h5>

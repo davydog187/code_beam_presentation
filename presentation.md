@@ -333,15 +333,15 @@ Phoenix.View.render(
   post: post
 )
 ```
-
-```eex
+---
+```elixir
 <article>
   <header>
     <h1><%= @post.title %></h1>
     <address><%= @post.author %></address>
   </header>
   <section>
-    <%# render_markdown(@post.body) %>
+    <%# No longer needed -> render_markdown(@post.body) %>
     <%= @post.body %>
   </section>
 </article>
@@ -375,6 +375,14 @@ end
 ```
 ---
 # Lets make `%Markdown{}` implement the `Ecto.Type` Behaviour :dollar:
+---
+* **Type**is the backing type of our Markdown field, which is :string
+
+* **Load** takes data from the database, converts it to `%Markdown{}`
+
+* **Dump**takes a `%Markdown{}`` struct, validates it, and returns a valid :string
+
+* **Cast** is called when casting values for `Ecto.Changeset` or `Ecto.Query`.
 ---
 ```elixir
 defmodule Blog.Post do
