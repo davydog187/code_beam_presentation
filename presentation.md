@@ -112,7 +112,7 @@ def foo({:error, reason}), do: reason
 ---
 # Case Study
 # Let's build a blog :newspaper:
-## Using *Phoenix* and *Ecto*
+## using *Phoenix* and *Ecto*
 ---
 # Post Data Model
 
@@ -141,6 +141,15 @@ end
   </section>
 </article>
 ```
+---
+# Blog Features
+:white_check_mark: Text
+:x: Titles
+:x: Paragraphs
+:x: Links
+:x: Images
+:x: Bold / Italics
+
 ---
 # Let's :hot_pepper: it up with some Markdown
 
@@ -240,7 +249,20 @@ end
 :x: We need have to remember to use the `render_markdown/1` function for any field we want to support Markdown
 
 ---
-# TODO write example that illustrates excessive function calls to `render_markdown/1`
+```elixir
+<article>
+  <header>
+    <h1><%= render_markdown(@post.title) %></h1>
+    <h2><%= render_markdown(@post.dek) %></h2>
+    <address><%= @post.author %></address>
+    <date><%= @post.published_at %></date>
+  </header>
+  <section>
+    <%= render_markdown(@post.body) %>
+  </section>
+  <footer><%= render_markdown(@post.footer)</footer>
+</article>
+```
 ---
 # We're here to Refactor for Maintainability :tm:
 
@@ -251,12 +273,37 @@ end
 :white_check_mark: Open for extension
 :x: Closed for modification
 
-> Protocols are a mechanism to achieve polymorphism in Elixir. Dispatching on a protocol is available to any data type as long as it implements the protocol. - *Elixir Documentation*
+> Protocols are a mechanism to achieve polymorphism in Elixir. Dispatching on a protocol is available to any data type as long as it implements the protocol. - [Elixir Protocol Guide](https://elixir-lang.org/getting-started/protocols.html)
 
-#### TODO add link to docs
 ---
-# TODO make a pseudo protocol consolodation example
+```elixir
+defprotocol Size do
+  @doc "Calculates the size (and not the length!) of a data structure"
+  def size(data)
+end
 
+defimpl Size, for: BitString do
+  def size(string), do: byte_size(string)
+end
+
+defimpl Size, for: Map do
+  def size(map), do: map_size(map)
+end
+
+defimpl Size, for: Tuple do
+  def size(tuple), do: tuple_size(tuple)
+end
+```
+---
+```elixir
+defprotocol Size do
+  @doc "Calculates the size (and not the length!) of a data structure"
+
+  def size(string) when is_binary(string), do: byte_size(string)
+  def size(map) when is_map(map), do: map_size(map)
+  def size(tuple) when is_tupe(tuple), do: tuple_size(tuple)
+end
+```
 ---
 ## We can extend the rendering power of Phoenix by leveraging its `Phoenix.HTML.Safe` Protocol
 ---
@@ -384,7 +431,7 @@ Phoenix.View.render(
 3. Behaviours can be leveraged to plug into existing systems
 
 ---
-# For more info, read my blog post: 
+# For more info, read my blog post:
 # [Beyond functions in Elixir: Refactoring for Maintainability](https://blog.usejournal.com/beyond-functions-in-elixir-refactoring-for-maintainability-5c73daba77f3)
 ---
 Presentation written in the **Marp framework** by Yuki Hattori, a Markdown based presentation framework.
