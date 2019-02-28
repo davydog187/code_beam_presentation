@@ -1,7 +1,7 @@
 <!-- $size: 16:9 -->
 <!--
 $theme: gaia
-template: invert
+class: invert
 page_number: true
 -->
 
